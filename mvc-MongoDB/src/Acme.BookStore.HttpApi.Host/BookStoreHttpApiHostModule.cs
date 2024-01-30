@@ -94,7 +94,7 @@ public class BookStoreHttpApiHostModule : AbpModule
     {
         Configure<AbpAspNetCoreMvcOptions>(options =>
         {
-            options.ConventionalControllers.Create(typeof(BookStoreApplicationModule).Assembly);
+           // options.ConventionalControllers.Create(typeof(BookStoreApplicationModule).Assembly);
         });
     }
 

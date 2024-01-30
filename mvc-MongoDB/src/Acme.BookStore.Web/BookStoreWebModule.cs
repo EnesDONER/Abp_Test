@@ -46,6 +46,8 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
+using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.Http.ProxyScripting.Generators.JQuery;
 
 namespace Acme.BookStore.Web;
 
@@ -85,7 +87,11 @@ public class BookStoreWebModule : AbpModule
     {
         var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
-
+        Configure<DynamicJavaScriptProxyOptions>(options =>
+        {
+            options.EnableModule("app");
+            options.EnableModule("booksStore");
+        });
         ConfigureBundles();
         ConfigureCache();
         ConfigureDataProtection(context, configuration, hostingEnvironment);
@@ -224,7 +230,7 @@ public class BookStoreWebModule : AbpModule
             options.AddMaps<BookStoreWebModule>();
         });
     }
-
+    
     private void ConfigureVirtualFileSystem(IWebHostEnvironment hostingEnvironment)
     {
         if (hostingEnvironment.IsDevelopment())
