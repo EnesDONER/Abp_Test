@@ -48,6 +48,8 @@ using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Http.ProxyScripting.Generators.JQuery;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Acme.BookStore.Permissions;
 
 namespace Acme.BookStore.Web;
 
@@ -92,6 +94,13 @@ public class BookStoreWebModule : AbpModule
             options.EnableModule("app");
             options.EnableModule("booksStore");
         });
+        Configure<RazorPagesOptions>(options =>
+        {
+            options.Conventions.AuthorizePage("/Books/Index", BookStorePermissions.Books.Default);
+            options.Conventions.AuthorizePage("/Books/CreateModal", BookStorePermissions.Books.Create);
+            options.Conventions.AuthorizePage("/Books/EditModal", BookStorePermissions.Books.Edit);
+        });
+
         ConfigureBundles();
         ConfigureCache();
         ConfigureDataProtection(context, configuration, hostingEnvironment);
