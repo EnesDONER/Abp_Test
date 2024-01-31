@@ -18,6 +18,7 @@ public class BookController : AbpController, IBookAppService
 
     public BookController(IBookAppService bookAppService)
     {
+
         _bookAppService = bookAppService;
     }
 
