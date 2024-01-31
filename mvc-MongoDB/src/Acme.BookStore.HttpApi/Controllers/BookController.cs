@@ -54,4 +54,12 @@ public class BookController : AbpController, IBookAppService
     {
         return _bookAppService.DeleteAsync(id);
     }
+
+    [HttpGet]
+    [Route("GetAuthorLookupAsync")]
+
+    public Task<ListResultDto<AuthorLookupDto>> GetAuthorLookupAsync()
+    {
+        return _bookAppService.GetAuthorLookupAsync();
+    }
 }
