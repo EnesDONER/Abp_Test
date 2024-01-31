@@ -15,6 +15,7 @@ const routes: Routes = [
     path: 'identity',
     loadChildren: () => import('@abp/ng.identity').then(m => m.IdentityModule.forLazy()),
   },
+  { path: 'books', loadChildren: () => import('./book/book.module').then(m => m.BookModule) },
   {
     path: 'tenant-management',
     loadChildren: () =>
@@ -25,6 +26,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('@abp/ng.setting-management').then(m => m.SettingManagementModule.forLazy()),
   },
+  { path: 'books', loadChildren: () => import('./book/book.module').then(m => m.BookModule) },
 ];
 
 @NgModule({
